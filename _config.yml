@@ -1,0 +1,19 @@
+title:             Wang Siyao
+email:             1521925222@qq.com
+description:       Personal website of Wang Siyao
+author:            Wang Siyao
+baseurl:           "/blog"
+url:               "http://wangsiyao.github.io"
+
+# Social Profiles
+twitter_username:  SBootstrap
+github_username:   BlackrockDigital
+facebook_username: StartBootstrap
+
+# Build settings
+markdown:          kramdown
+paginate:          5
+paginate_path:     "/posts/page:num/"
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
