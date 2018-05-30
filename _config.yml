@@ -1,13 +1,13 @@
 title:             Wang Siyao
 email:             1521925222@qq.com
-description:       Personal website of Wang Siyao
+description:       B.Eng. in Software Engineering, Tongji University
 author:            Wang Siyao
 baseurl:           ""
 url:               "http://wangsiyao.github.io"
 
 # Social Profiles
 twitter_username:  SBootstrap
-github_username:   BlackrockDigital
+github_username:   WangSiyao
 facebook_username: StartBootstrap
 
 # Build settings
