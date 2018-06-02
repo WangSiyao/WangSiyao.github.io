@@ -1,0 +1,56 @@
+---
+layout: post
+title:  "Left-leaning Red Black BST"
+subtitle: "From 2-3 Search Tree's perspective"
+date:   2018-05-31 21:10:13 -0400
+background: '/img/posts/06.jpg'
+---
+
+<p>First let's see the definition of left-leaning red black binary search tree.</p>
+<p>Left-leaning Red Black BST is a BST such that:</p>
+<blockquote class="blockquote">1.No node has two red links connected to it.</blockquote>
+<blockquote class="blockquote">2.Every path from root to null link has the same number of black links.</blockquote>
+<blockquote class="blockquote">3.Red links lean left.</blockquote>
+<p>It may be abstruse to understand why the left-leaning red black BST has such limitations from the definition. However, if we look through 2-3 search tree beforehand, we can easily comprehend what red black BST is doing.</p>
+<p>So let's go through 2-3 Search Tree first!</p>
+<h2 class="section-heading">2-3 Search Tree</h2>
+<p>Different from binary search trees, 2-3 search tree allows 1 or 2 keys per node, and node with 1 key has two links, node with 2 keys has three links.</p>
+<img class="img-fluid" src="/img/posts/2018-05-31/01.jpg" alt="Demo Image">
+<p>Compared with binary search trees, 2-3 search tree is perfect balanced, which means that every path from root to null link has same lenght, so that it can guarentee logarithmic performance for all operations(search, insertion, deletion, etc.)</p>
+<p>The first step of insertion to 2-3 search trees is to search in the trees, which is the same as BST. After searching precess, we may get a 2-node or a 3-node. For 2-node, we can simply replace the 2-node with 3-node with the insertion key. For 3-node, we need some extra process：</p>
+<blockquote class="blockquote">1.Add new key to 3-node to create temporary 4-node.</blockquote>
+<blockquote class="blockquote">2.Move middle key in 4-node(a 4-node has 3 keys) into parent.</blockquote>
+<blockquote class="blockquote">3.Repeat up the tree, if necessary.</blockquote>
+<blockquote class="blockquote">4.If you reach the root and it's a 4-node, split it into three 2-node.</blockquote>
+<p>Following is an example of inserting 6 into the 2-3 search tree.</p>
+<img class="img-fluid" src="/img/posts/2018-05-31/02.jpg" alt="Demo Image">
+<p>We can find that the difference between the insertion to a 2-3 tree and insertion to BST is how the height of the tree changes. For BST, the tree's height changes at the bottom of the tree. While for 2-3 trees, the height changes at the root so as to maintain the perfect balance and guarentee logarithmic performance for search and insert.</p>
+<p>Now let's go back to left-leaning red black BST. We can regard it as an implementation of 2-3 search tree. It represents 2-3 tree as BST and uses "internal" left-leaning red links as "glue" for 3-nodes. The following picture shows how such red links can use a binary search tree structure to represent 3-nodes.</p>
+<img class="img-fluid" src="/img/posts/2018-05-31/03.jpg" alt="Demo Image">
+<p>We can observe that the search of left-leaning red black BST is the same as for elementary BST ignoring link colors, but it runs faster because of betther balance.</p>
+<p>Before go through the detail of insertion to a left-leaning red black BST, we need to know some elementary operations for red-black BSTs.</p>
+<p><i>1.Left Rotation: Orient a (temporary) right-leaning red link to lean left.</i></p>
+<img class="img-fluid" src="/img/posts/2018-05-31/04.jpg" alt="Demo Image">
+<p><i>2.Right Rotation: Orient a left-leaning red link to (temporarily) lean right.</i></p>
+<p><i>3.Color Flip: Recolor to split a (temporary) 4-node.</i></p>
+<img class="img-fluid" src="/img/posts/2018-05-31/05.jpg" alt="Demo Image">
+<p>All the operations above are to maintain the left-leaning red black BST's structure. We can use just these operations to handle with all cases that violates the limitations of left-leaning red black BST.</p>
+<blockquote class="blockquote">1.Right chld red, left child black: rotate left.</blockquote>
+<blockquote class="blockquote">2.Left child red, left-left grandchild red: rotate right.</blockquote>
+<blockquote class="blockquote">3.Both children red: flip color.</blockquote>
+<p>Insertion into a left-leaning red black tree also has two situations, just the same as insertion into 2-3 search trees.</p>
+<p>Case 1: Insert into a 2-node at the bottom.</p>
+<blockquote class="blockquote">1.Do standard BST insertion, and color new link red.</blockquote>
+<blockquote class="blockquote">2.If new red link is a right link, perform left rotation operation.</blockquote>
+<p>Case 2: Insert into a 3-node at the bottom.</p>
+<blockquote class="blockquote">1.Do standard BST insertion, and color new link red.</blockquote>
+<blockquote class="blockquote">2.Rotate right to balance the 4-node, if necessary. (Rotate right if the new node is linked to the red-linked node.)</blockquote>
+<blockquote class="blockquote">3.Flip colors to pass red link up one level.</blockquote>
+<blockquote class="blockquote">4.Rotate to make lean left, if necessary.</blockquote>
+<blockquote class="blockquote">5.Repeat case 1 or case 2 up the tree, if necessary.</blockquote>
+<p>The following picture is an example of inserting into a 3-node.</p>
+<img class="img-fluid" src="/img/posts/2018-05-31/06.jpg" alt="Demo Image">
+<p>As left-leaning red black BST is an implementation of 2-3 search trees, the operations above is equal to insertion into a 3-node at the bottom of a 2-3 search tree. The former insertion example can be depicted as an insertion to an equal 2-3 seearch tree, like following picture shows:</p>
+<img class="img-fluid" src="/img/posts/2018-05-31/07.jpg" alt="Demo Image">
+<p>We can observe from the above two pictures that left-leaning red black BST and 2-3 search tree has the same structures both before and after insertion operation. So left-leaning red black BST combines the advantages of BST and 2-3 search node, making it a popular structure in computer world.</p>
+<p>Thanks to Coursera <a href="https://www.coursera.org/learn/algorithms-part1">Algorithms</a> courses taught by <a href="https://www.coursera.org/instructor/~246867">Kevin Wayne</a> and <a href="https://www.coursera.org/instructor/~250165">Robert Sedgewick</a> from Princeton University</p>
